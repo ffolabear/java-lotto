@@ -118,10 +118,9 @@
     - `Input` : 사용자의 입력을 담당하는 클래스
     - `Message` : 로또추첨을 진행하면서 출력하는 메세지들을 담당하는 클래스
 
-
-- `validaition` 패키지 
+    
+- `validaition` 패키지
     - `MoneyValidation` : 사용자의 입력값이 올바른 금액인지 검증하는 클래스
     - `NumberValidation` : 사용자가 입력한 숫자들이 올바른 당첨 숫자인지 검증하는 클래스
-      
 
 <br>
