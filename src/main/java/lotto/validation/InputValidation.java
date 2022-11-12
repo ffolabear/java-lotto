@@ -1,10 +1,8 @@
 package lotto.validation;
 
-import java.util.List;
-
 public interface InputValidation {
 
-    public void isInputInteger(String input);
+    void isInputNumber(String input);
 
-    public int convertToInteger(String input);
+    int convertToInteger(String input);
 }
