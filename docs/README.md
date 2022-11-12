@@ -119,6 +119,8 @@
 - `util` 패키지
     - `Input` : 사용자의 입력을 담당하는 클래스
     - `Message` : 로또추첨을 진행하면서 출력하는 메세지들을 담당하는 클래스
+    - `MessageDetail` : 추첨 진행중 출력하는 메세지들을 상수로 갖는 `enum` 
+    - `RankDetail` : 추첨 결과 메세지들을 상수로 갖는 `enum`
 
     
 - `validaition` 패키지
