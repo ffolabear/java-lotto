@@ -1,25 +1,39 @@
 package lotto.validation;
 
-public class MoneyValidation {
+public class MoneyValidation implements InputValidation {
 
-    public int validateMoney(String inputMoney) {
-        int convertedInput = isInputInteger(inputMoney);
-        isInputDividable(convertedInput);
-        return convertedInput;
+    int convertedMoney;
+
+    public void validate(String money) {
+        isInputInteger(money);
+        convertedMoney = convertToInteger(money);
+        isInputDividable(convertedMoney);
     }
 
-    private int isInputInteger(String inputMoney) {
-        int convertedInput = 0;
+    public int getMoney() {
+        return convertedMoney;
+    }
+
+    public int getTicket() {
+        return convertedMoney / 1000;
+    }
+
+    @Override
+    public void isInputInteger(String money) {
         try {
-            convertedInput = Integer.parseInt(inputMoney);
+            Integer.parseInt(money);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
-        return convertedInput;
     }
 
-    private void isInputDividable(int convertedInput) {
-        if (convertedInput % 1000 != 0) {
+    @Override
+    public int convertToInteger(String money) {
+        return Integer.parseInt(money);
+    }
+
+    private void isInputDividable(int money) {
+        if (money % 1000 != 0) {
             throw new IllegalArgumentException();
         }
     }
