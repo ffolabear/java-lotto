@@ -111,8 +111,10 @@
 
 
 - `service` 패키지
+    - `LottoGenerator` : 로또를 생성하는 클래스
     - `LottoService` : 사용자의 금액 입력부터 메세지 출력까지 모든것을 관리하는 클래스
-   
+    - `PurchaseLotto` : 사용자가 입력한 금액만큼의 로또를 생성하는 클래스    
+
 
 - `util` 패키지
     - `Input` : 사용자의 입력을 담당하는 클래스
@@ -120,6 +122,7 @@
 
     
 - `validaition` 패키지
+    - `InputValidation` : 검증부분의 공통 부분을 추상화 하는 인터페이스
     - `MoneyValidation` : 사용자의 입력값이 올바른 금액인지 검증하는 클래스
     - `NumberValidation` : 사용자가 입력한 숫자들이 올바른 당첨 숫자인지 검증하는 클래스
 
