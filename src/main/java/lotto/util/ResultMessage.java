@@ -1,26 +1,17 @@
 package lotto.util;
 
-import java.io.BufferedReader;
+import lotto.view.MessageDetail;
+import lotto.view.RankDetail;
 
-public class Message {
+public class ResultMessage {
 
-    public void inputMoneyMessage() {
-        System.out.println(MessageDetail.INPUT_MONEY.getMessage());
-    }
-
-    public void purchaseResultMessage(int ticket) {
-        System.out.println(ticket + MessageDetail.PURCHASE_RESULT.getMessage());
-    }
-
-    public void inputBonusNumberMessage() {
-        System.out.println(MessageDetail.INPUT_BONUS_NUMBER);
-    }
+    StringBuilder sb;
 
     public void drawResultMessage() {
-        StringBuilder sb = new StringBuilder();
+        sb = new StringBuilder();
+        sb.append("\n");
         sb.append(MessageDetail.RESULT_TITLE.getMessage());
         sb.append(MessageDetail.RESULT_TITLE_LINE.getMessage());
-
     }
 
     public String firstPlaceMessage(int matchCount) {
@@ -42,4 +33,5 @@ public class Message {
     public String fourthPlaceMessage(int matchCount) {
         return RankDetail.FOURTH.getRankMessage() + matchCount + RankDetail.UNIT.getRankMessage();
     }
+
 }
