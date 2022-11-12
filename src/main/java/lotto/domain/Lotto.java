@@ -1,8 +1,9 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 
 public class Lotto {
+
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -17,4 +18,6 @@ public class Lotto {
     }
 
     // TODO: 추가 기능 구현
+
+
 }
