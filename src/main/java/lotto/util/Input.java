@@ -2,29 +2,47 @@ package lotto.util;
 
 import camp.nextstep.edu.missionutils.Console;
 import lotto.validation.MoneyValidation;
-import lotto.validation.NumberValidation;
+import lotto.validation.LottoValidation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Input {
 
     MoneyValidation moneyValidation;
-    NumberValidation numberValidation;
+    LottoValidation numberValidation;
+    List<Integer> winningNumbers;
+    int userMoney;
 
     public Input() {
-        this.numberValidation = new NumberValidation();
-        this.numberValidation = new NumberValidation();
+        this.moneyValidation = new MoneyValidation();
+        this.numberValidation = new LottoValidation();
+        this.winningNumbers = new ArrayList<>();
+        this.userMoney = 0;
     }
 
-    public int inputUserMoney() {
+    public int getUserMoney() {
+        return userMoney;
+    }
+
+    public int getLottoTicket() {
+        return userMoney / 1000;
+    }
+
+    public List<Integer> getWinningNumbers() {
+        return winningNumbers;
+    }
+
+    public void inputUserMoney() {
         String inputMoney = Console.readLine();
-        return moneyValidation.validateMoney(inputMoney);
+        moneyValidation.validate(inputMoney);
+        userMoney = moneyValidation.getMoney();
     }
 
-
-    public List<Integer> inputLottoWinningNumbers() {
-        List<String> inputLottoNumbers = List.of(Console.readLine().split(","));
-        return numberValidation.validateNumbers(inputLottoNumbers);
+    public void inputWinningNumbers() {
+        String inputNumbers = Console.readLine();
+        numberValidation.validate(inputNumbers);
+        winningNumbers = numberValidation.getValidNumbers();
     }
 
 }
