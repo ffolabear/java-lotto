@@ -1,10 +1,14 @@
 package lotto.validation;
 
+import lotto.util.ErrorMessage;
+
 public class MoneyValidation implements InputValidation {
 
     int convertedMoney;
+    ErrorMessage errorMessage = new ErrorMessage();
 
     public void validate(String money) {
+        isInputNumber(money);
         isInputInteger(money);
         convertedMoney = convertToInteger(money);
         isInputDividable(convertedMoney);
@@ -18,12 +22,18 @@ public class MoneyValidation implements InputValidation {
         return convertedMoney / 1000;
     }
 
-    @Override
     public void isInputInteger(String money) {
-        try {
-            Integer.parseInt(money);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+        if (Long.parseLong(money) > Integer.MAX_VALUE) {
+            errorMessage.illegalMoneyTypeMessage();
+            throw new IllegalArgumentException();
+        }
+    }
+
+    @Override
+    public void isInputNumber(String money) {
+        if (!money.matches("[0-9]+")) {
+            errorMessage.illegalArgumentMessage();
+            throw new IllegalArgumentException();
         }
     }
 
@@ -34,6 +44,7 @@ public class MoneyValidation implements InputValidation {
 
     private void isInputDividable(int money) {
         if (money % 1000 != 0) {
+            errorMessage.illegalMoneyMessage();
             throw new IllegalArgumentException();
         }
     }
