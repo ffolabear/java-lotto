@@ -1,5 +1,7 @@
 package lotto.validation;
 
+import lotto.util.ErrorMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,20 +12,21 @@ public class LottoValidation implements InputValidation {
     public static final int END_NUMBER = 45;
     public static final int NUMBER_AMOUNT = 6;
     List<Integer> convertedNumbers;
+    ErrorMessage errorMessage = new ErrorMessage();
 
     public void validate(String numbers) {
         List<String> rawNumbers = convertToStringNumberList(numbers);
-//        isValidAmount(rawNumbers);
         convertedNumbers = convertToIntegerNumberList(rawNumbers);
-        checkDuplication();
+        checkDuplication(convertedNumbers);
     }
 
     @Override
-    public void isInputInteger(String number) {
+    public void isInputNumber(String number) {
         try {
             Integer.parseInt(number);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            errorMessage.illegalArgumentMessage();
+            throw new IllegalArgumentException();
         }
     }
 
@@ -43,32 +46,28 @@ public class LottoValidation implements InputValidation {
     private List<Integer> convertToIntegerNumberList(List<String> rawNumbers) {
         convertedNumbers = new ArrayList<>();
         for (String number : rawNumbers) {
-            isInputInteger(number);
+            isInputNumber(number);
             isValidRange(number);
             convertedNumbers.add(convertToInteger(number));
         }
         return convertedNumbers;
     }
 
-//    private void isValidAmount(List<String> rawNumbers) {
-//        if (rawNumbers.size() != 6) {
-//            throw new IllegalArgumentException();
-//        }
-//    }
-
     private void isValidRange(String number) {
         int convertedNumber = Integer.parseInt(number);
         if (convertedNumber < START_NUMBER || END_NUMBER < convertedNumber) {
+            errorMessage.illegalNumberRangeMessage();
             throw new IllegalArgumentException();
         }
     }
 
-    private void checkDuplication() {
+    public void checkDuplication(List<Integer> convertedNumbers) {
         List<Integer> checkingDuplication = convertedNumbers.stream()
                 .distinct()
                 .collect(Collectors.toList());
 
         if (checkingDuplication.size() != convertedNumbers.size()) {
+            errorMessage.duplicateNumberMessage();
             throw new IllegalArgumentException();
         }
     }
