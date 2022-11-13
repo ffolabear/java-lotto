@@ -55,4 +55,11 @@ public class ErrorMessage {
         System.out.println(sb);
     }
 
+    public void duplicateBonusNumberMessage() {
+        sb = new StringBuilder();
+        sb.append(ErrorDetail.ERROR_HEAD.getError())
+                .append(ErrorDetail.ERROR_DUPLICATE_BONUS_NUMBER.getError());
+        System.out.println(sb);
+    }
+
 }
