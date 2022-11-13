@@ -8,7 +8,7 @@ public class MoneyValidation implements InputValidation {
     ErrorMessage errorMessage = new ErrorMessage();
 
     public void validate(String money) {
-        isInputNumber(money);
+        isInputDigit(money);
         isInputInteger(money);
         convertedMoney = convertToInteger(money);
         isInputDividable(convertedMoney);
@@ -30,7 +30,7 @@ public class MoneyValidation implements InputValidation {
     }
 
     @Override
-    public void isInputNumber(String money) {
+    public void isInputDigit(String money) {
         if (!money.matches("[0-9]+")) {
             errorMessage.illegalArgumentMessage();
             throw new IllegalArgumentException();
