@@ -1,22 +1,20 @@
 package lotto.util;
 
 import camp.nextstep.edu.missionutils.Console;
-import lotto.validation.MoneyValidation;
-import lotto.validation.LottoValidation;
+import lotto.validation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Input {
 
-    MoneyValidation moneyValidation;
-    LottoValidation numberValidation;
     List<Integer> winningNumbers;
     int userMoney;
+    int ticket;
+    int bonusNumber;
+
 
     public Input() {
-        this.moneyValidation = new MoneyValidation();
-        this.numberValidation = new LottoValidation();
         this.winningNumbers = new ArrayList<>();
         this.userMoney = 0;
     }
@@ -26,7 +24,11 @@ public class Input {
     }
 
     public int getLottoTicket() {
-        return userMoney / 1000;
+        return ticket;
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
     }
 
     public List<Integer> getWinningNumbers() {
@@ -35,14 +37,24 @@ public class Input {
 
     public void inputUserMoney() {
         String inputMoney = Console.readLine();
-        moneyValidation.validate(inputMoney);
-        userMoney = moneyValidation.getMoney();
+        MoneyValidation validation = new MoneyValidation(inputMoney);
+        validation.validate(inputMoney);
+        userMoney = validation.getMoney();
+        ticket = validation.getTicket();
     }
 
     public void inputWinningNumbers() {
         String inputNumbers = Console.readLine();
-        numberValidation.validate(inputNumbers);
-        winningNumbers = numberValidation.getValidNumbers();
+        WinningNumberValidation validation = new WinningNumberValidation();
+        validation.validate(inputNumbers);
+        winningNumbers = validation.getValidatedWinningNumber();
+    }
+
+    public void inputBonusNumber(List<Integer> winningNumbers) {
+        String inputBonusNumber = Console.readLine();
+        BonusNumberValidation validation = new BonusNumberValidation(winningNumbers, inputBonusNumber);
+        validation.validate();
+        bonusNumber = validation.getValidatedBonusNumber();
     }
 
 }

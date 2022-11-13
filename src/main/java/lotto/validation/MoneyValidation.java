@@ -2,15 +2,22 @@ package lotto.validation;
 
 import lotto.util.ErrorMessage;
 
-public class MoneyValidation implements InputValidation {
+public class MoneyValidation{
 
     int convertedMoney;
-    ErrorMessage errorMessage = new ErrorMessage();
+    ErrorMessage errorMessage;
+    NumberValidation numberValidation;
 
-    public void validate(String money) {
-        isInputDigit(money);
-        isInputInteger(money);
-        convertedMoney = convertToInteger(money);
+    public MoneyValidation(String inputMoney) {
+        errorMessage = new ErrorMessage();
+        numberValidation = new NumberValidation();
+        validate(inputMoney);
+    }
+
+    public void validate(String inputMoney) {
+        numberValidation.isInputDigit(inputMoney);
+        isInputInteger(inputMoney);
+        convertedMoney = numberValidation.convertToInteger(inputMoney);
         isInputDividable(convertedMoney);
     }
 
@@ -22,24 +29,11 @@ public class MoneyValidation implements InputValidation {
         return convertedMoney / 1000;
     }
 
-    public void isInputInteger(String money) {
+    private void isInputInteger(String money) {
         if (Long.parseLong(money) > Integer.MAX_VALUE) {
             errorMessage.illegalMoneyTypeMessage();
             throw new IllegalArgumentException();
         }
-    }
-
-    @Override
-    public void isInputDigit(String money) {
-        if (!money.matches("[0-9]+")) {
-            errorMessage.illegalArgumentMessage();
-            throw new IllegalArgumentException();
-        }
-    }
-
-    @Override
-    public int convertToInteger(String money) {
-        return Integer.parseInt(money);
     }
 
     private void isInputDividable(int money) {

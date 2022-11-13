@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.util.ErrorMessage;
-import lotto.validation.LottoValidation;
+import lotto.validation.WinningNumberValidation;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        LottoValidation lottoValidation = new LottoValidation();
-        lottoValidation.checkDuplication(numbers);
+        WinningNumberValidation validation = new WinningNumberValidation();
+        validation.checkDuplication(numbers);
         this.numbers = numbers;
     }
 
