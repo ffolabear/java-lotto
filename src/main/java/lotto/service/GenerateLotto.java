@@ -3,13 +3,13 @@ package lotto.service;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PurchaseLotto {
+public class GenerateLotto {
 
     int ticket;
     List<List<Integer>> purchasedLotto;
     LottoGenerator lottoGenerator;
 
-    public PurchaseLotto(int ticket) {
+    public GenerateLotto(int ticket) {
         this.ticket = ticket;
         lottoGenerator = new LottoGenerator();
         generateLottoList();
@@ -30,5 +30,6 @@ public class PurchaseLotto {
     private List<Integer> generateLotto() {
         return lottoGenerator.generateLotto();
     }
+
 
 }
