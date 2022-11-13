@@ -1,5 +1,6 @@
 package lotto.validation;
 
+import lotto.domain.Lotto;
 import lotto.util.ErrorMessage;
 
 import java.util.ArrayList;
@@ -17,11 +18,12 @@ public class LottoValidation implements InputValidation {
     public void validate(String numbers) {
         List<String> rawNumbers = convertToStringNumberList(numbers);
         convertedNumbers = convertToIntegerNumberList(rawNumbers);
+        isValidAmount(convertedNumbers);
         checkDuplication(convertedNumbers);
     }
 
     @Override
-    public void isInputNumber(String number) {
+    public void isInputDigit(String number) {
         try {
             Integer.parseInt(number);
         } catch (Exception e) {
@@ -46,11 +48,18 @@ public class LottoValidation implements InputValidation {
     private List<Integer> convertToIntegerNumberList(List<String> rawNumbers) {
         convertedNumbers = new ArrayList<>();
         for (String number : rawNumbers) {
-            isInputNumber(number);
+            isInputDigit(number);
             isValidRange(number);
             convertedNumbers.add(convertToInteger(number));
         }
         return convertedNumbers;
+    }
+
+    private void isValidAmount(List<Integer> convertedNumbers) {
+        if (convertedNumbers.size() != 6) {
+            ErrorMessage.illegalNumberAmountMessage();
+            throw new IllegalArgumentException();
+        }
     }
 
     private void isValidRange(String number) {
