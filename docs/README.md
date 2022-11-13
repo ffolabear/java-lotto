@@ -107,12 +107,13 @@
 
 - `domain` 패키지
     - `Lotto` : 사용자가 입력한 금액의 천원마다 생생하는 로또 객체 
-    - `Draw` : 각 로또 객체와 생성한 숫자에 대한 결과를 만드는 객체
+
 
 - `service` 패키지
     - `LottoGenerator` : 로또를 생성하는 클래스
     - `LottoService` : 사용자의 금액 입력부터 메세지 출력까지 모든것을 관리하는 클래스
     - `PurchaseLotto` : 사용자가 입력한 금액만큼의 로또를 생성하는 클래스    
+    - `LottoDraw` : 생성한 로또와 사용자가 입력한 당첨숫자들을 비교해서 추첨하는 클래스
 
 
 - `util` 패키지
@@ -120,14 +121,20 @@
     - `SystemMessage` : 로또추첨을 진행하면서 출력하는 메세지들을 담당하는 클래스
     - `ErrorMessage` : 로또추첨을 진행하면서 에러가 발생할 때 출력하는 메세지들을 담당하는 클래스
     - `ResultMessage` : 로또추첨을 진행 후 추첨 결과를 출력하는 메세지들을 담당하는 클래스
+
     
 - `validaition` 패키지
     - `InputValidation` : 검증부분의 공통 부분을 추상화 하는 인터페이스
     - `MoneyValidation` : 사용자의 입력값이 올바른 금액인지 검증하는 클래스
-    - `NumberValidation` : 사용자가 입력한 숫자들이 올바른 당첨 숫자인지 검증하는 클래스
-    
+    - `NumberValidation` : 사용자가 입력한 값들중 숫자에 대한 기본적인 검증을 하는 클래스
+    - `WinningNumberValidation` : 사용자가 입력한 당첨 번호들을 검증하는 클래스
+    - `BonusNumberValidation` : 사용자가 입력한 보너스 번호를 검증하는 클래스
+    - `LottoSetting` : 입력값들을 검증하기 위한 상수들을 담은 `enum`
+     
+
 - `view` 패키지 
-    - `ErrorDetail` : 
+    - `ErrorDetail` : 추첨 진행중 발생하는 에러 메세지들을 상수로 갖는 `enum`
     - `MessageDetail` : 추첨 진행중 출력하는 메세지들을 상수로 갖는 `enum`
     - `RankDetail` : 추첨 결과 메세지들을 상수로 갖는 `enum`
+    
 <br>
