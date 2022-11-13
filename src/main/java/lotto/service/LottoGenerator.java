@@ -1,17 +1,13 @@
 package lotto.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import lotto.validation.LottoValidation;
+import lotto.validation.LottoSetting;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class LottoGenerator {
-
-    final int START_NUMBER = LottoValidation.START_NUMBER;
-    final int END_NUMBER = LottoValidation.END_NUMBER;
-    final int NUMBER_AMOUNT = LottoValidation.NUMBER_AMOUNT;
 
     List<Integer> generatedLotto;
 
@@ -27,7 +23,10 @@ public class LottoGenerator {
 
     public void generateNumberList() {
         generatedLotto = new ArrayList<>();
-        generatedLotto = Randoms.pickUniqueNumbersInRange(START_NUMBER, END_NUMBER, NUMBER_AMOUNT);
+        generatedLotto = Randoms.pickUniqueNumbersInRange(
+                LottoSetting.START_NUMBER.getValue(),
+                LottoSetting.END_NUMBER.getValue(),
+                LottoSetting.NUMBER_AMOUNT.getValue());
     }
 
     private void sortNumbers() {
