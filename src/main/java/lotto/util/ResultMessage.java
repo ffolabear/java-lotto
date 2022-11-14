@@ -21,6 +21,7 @@ public class ResultMessage {
         this.bonusMatched = bonusMatched;
         this.resultMessage = new StringBuilder();
         bonusResultTurn = false;
+        System.out.println(drawResult);
         createMessage();
     }
 
@@ -31,13 +32,6 @@ public class ResultMessage {
 
     public void printResultMessage() {
         System.out.println(resultMessage);
-    }
-
-    private void createMessageBody() {
-        List<Integer> sortedResult = sortDrawResult();
-        for (int matchAmount : sortedResult) {
-            resultMessage.append(createMessageBodyLine(matchAmount));
-        }
     }
 
     private void createMessageHeader() {
@@ -57,35 +51,38 @@ public class ResultMessage {
         return format.format(prize);
     }
 
+    private void createMessageBody() {
+        List<Integer> sortedResult = sortDrawResult();
+        for (int matchAmount : sortedResult) {
+            resultMessage.append(createMessageBodyLine(matchAmount));
+        }
+    }
+
     private String createMessageBodyLine(int matchAmount) {
         StringBuilder messageBody = new StringBuilder();
         for (RankDetail rank : RankDetail.values()) {
             if (matchAmount == rank.getMatchAmount()) {
-                messageBody.append(makeLine(rank.getMatchAmount(), rank.getPrize()));
+                messageBody.append(createSingleMessageBodyLine(rank));
             }
         }
         return messageBody.toString();
     }
 
-
-    private String makeLine(int matchAmount, int prize) {
-        StringBuilder singleMessageBody = new StringBuilder();
-        if (matchAmount == 5) {
-            return makeLineWithBonus(matchAmount, prize);
+    private String createSingleMessageBodyLine(RankDetail rank) {
+        String prize = convertPrize(rank.getPrize());
+        if (rank.getRank().equals("bonus")) {
+            return String.format(MATCH_RESULT.getMessage(), rank.getMatchAmount(), BONUS_MATCHED.getMessage(),
+                    prize, bonusMatched) + "\n";
         }
-        singleMessageBody.append(
-                String.format(MATCH_RESULT.getMessage(), matchAmount, "", convertPrize(prize),
-                        drawResult.get(matchAmount))).append("\n");
-        return singleMessageBody.toString();
+        return String.format(MATCH_RESULT.getMessage(), rank.getMatchAmount(), "", prize,
+                drawResult.get(rank.getMatchAmount())) + "\n";
     }
 
-    private String makeLineWithBonus(int matchAmount, int prize) {
-        if (bonusResultTurn) {
-            return String.format(MATCH_RESULT.getMessage(), matchAmount, BONUS_MATCHED.getMessage(),
-                    convertPrize(prize), bonusMatched) + "\n";
-        }
-        bonusResultTurn = true;
-        return String.format(MATCH_RESULT.getMessage(), matchAmount, "", convertPrize(prize), bonusMatched) + "\n";
+
+
+    public void printYieldMessage(String yield) {
+        System.out.println(String.format(YIELD.getMessage(), yield));
     }
+
 
 }
