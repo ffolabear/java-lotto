@@ -74,7 +74,8 @@ public class LottoService {
     }
 
     private void calculateYield() {
-        CalculateYield calculateYield = new CalculateYield(lottoDraw.getDrawResult(), lottoDraw.getBonusNumberMatched(), input.getUserMoney());
+        CalculateYield calculateYield = new CalculateYield(lottoDraw.getDrawResult(), lottoDraw.getBonusNumberMatched(),
+                input.getUserMoney());
         resultMessage.printYieldMessage(calculateYield.getYield());
     }
 

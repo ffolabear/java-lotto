@@ -26,9 +26,7 @@ public class PurchaseLotto {
         purchasedLotto = new ArrayList<>();
         while (ticket > 0) {
             Lotto lotto = new Lotto(
-                    Randoms.pickUniqueNumbersInRange(
-                            START_NUMBER.getValue(),
-                            END_NUMBER.getValue(),
+                    Randoms.pickUniqueNumbersInRange(START_NUMBER.getValue(), END_NUMBER.getValue(),
                             NUMBER_AMOUNT.getValue()));
             ticket--;
             purchasedLotto.add(lotto.getNumbers());

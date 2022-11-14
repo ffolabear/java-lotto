@@ -3,7 +3,6 @@ package lotto.domain;
 import lotto.util.ErrorMessage;
 import lotto.validation.LottoValidation;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Lotto {

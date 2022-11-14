@@ -79,7 +79,6 @@ public class ResultMessage {
     }
 
 
-
     public void printYieldMessage(String yield) {
         System.out.println(String.format(YIELD.getMessage(), yield));
     }
