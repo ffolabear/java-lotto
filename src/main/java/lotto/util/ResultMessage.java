@@ -1,37 +1,91 @@
 package lotto.util;
 
-import lotto.view.MessageDetail;
 import lotto.view.RankDetail;
+
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import static lotto.view.RankMessageDetail.*;
 
 public class ResultMessage {
 
-    StringBuilder sb;
+    StringBuilder resultMessage;
+    Map<Integer, Integer> drawResult;
+    int bonusMatched;
+    boolean bonusResultTurn;
 
-    public void drawResultMessage() {
-        sb = new StringBuilder();
-        sb.append("\n");
-        sb.append(MessageDetail.RESULT_TITLE.getMessage());
-        sb.append(MessageDetail.RESULT_TITLE_LINE.getMessage());
+    public ResultMessage(Map<Integer, Integer> drawResult, int bonusMatched) {
+        this.drawResult = drawResult;
+        this.bonusMatched = bonusMatched;
+        this.resultMessage = new StringBuilder();
+        bonusResultTurn = false;
+        createMessage();
     }
 
-    public String firstPlaceMessage(int matchCount) {
-        return RankDetail.FIRST.getRankMessage() + matchCount + RankDetail.UNIT.getRankMessage();
+    private void createMessage() {
+        createMessageHeader();
+        createMessageBody();
     }
 
-    public String secondWithBonusPlaceMessage(int matchCount) {
-        return RankDetail.SECOND_BONUS.getRankMessage() + matchCount + RankDetail.UNIT.getRankMessage();
+    public void printResultMessage() {
+        System.out.println(resultMessage);
     }
 
-    public String secondPlaceMessage(int matchCount) {
-        return RankDetail.SECOND.getRankMessage() + matchCount + RankDetail.UNIT.getRankMessage();
+    private void createMessageBody() {
+        List<Integer> sortedResult = sortDrawResult();
+        for (int matchAmount : sortedResult) {
+            resultMessage.append(createMessageBodyLine(matchAmount));
+        }
     }
 
-    public String thirdPlaceMessage(int matchCount) {
-        return RankDetail.THIRD.getRankMessage() + matchCount + RankDetail.UNIT.getRankMessage();
+    private void createMessageHeader() {
+        StringBuilder messageHeader = new StringBuilder();
+        messageHeader.append("\n");
+        messageHeader.append(RESULT_TITLE.getMessage());
+        messageHeader.append(RESULT_TITLE_LINE.getMessage());
+        resultMessage.append(messageHeader);
     }
 
-    public String fourthPlaceMessage(int matchCount) {
-        return RankDetail.FOURTH.getRankMessage() + matchCount + RankDetail.UNIT.getRankMessage();
+    private List<Integer> sortDrawResult() {
+        return drawResult.keySet().stream().sorted().collect(Collectors.toList());
+    }
+
+    private String convertPrize(int prize) {
+        DecimalFormat format = new DecimalFormat("###,###");
+        return format.format(prize);
+    }
+
+    private String createMessageBodyLine(int matchAmount) {
+        StringBuilder messageBody = new StringBuilder();
+        for (RankDetail rank : RankDetail.values()) {
+            if (matchAmount == rank.getMatchAmount()) {
+                messageBody.append(makeLine(rank.getMatchAmount(), rank.getPrize()));
+            }
+        }
+        return messageBody.toString();
+    }
+
+
+    private String makeLine(int matchAmount, int prize) {
+        StringBuilder singleMessageBody = new StringBuilder();
+        if (matchAmount == 5) {
+            return makeLineWithBonus(matchAmount, prize);
+        }
+        singleMessageBody.append(
+                String.format(MATCH_RESULT.getMessage(), matchAmount, "", convertPrize(prize),
+                        drawResult.get(matchAmount))).append("\n");
+        return singleMessageBody.toString();
+    }
+
+    private String makeLineWithBonus(int matchAmount, int prize) {
+        if (bonusResultTurn) {
+            return String.format(MATCH_RESULT.getMessage(), matchAmount, BONUS_MATCHED.getMessage(),
+                    convertPrize(prize), bonusMatched) + "\n";
+        }
+        bonusResultTurn = true;
+        return String.format(MATCH_RESULT.getMessage(), matchAmount, "", convertPrize(prize), bonusMatched) + "\n";
     }
 
 }
