@@ -1,8 +1,9 @@
 package lotto.domain;
 
 import lotto.util.ErrorMessage;
-import lotto.validation.WinningNumberValidation;
+import lotto.validation.LottoValidation;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
@@ -11,9 +12,10 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        WinningNumberValidation validation = new WinningNumberValidation();
+        LottoValidation validation = new LottoValidation();
         validation.checkDuplication(numbers);
         this.numbers = numbers;
+        sortNumbers();
     }
 
     private void validate(List<Integer> numbers) {
@@ -24,6 +26,12 @@ public class Lotto {
     }
 
     // TODO: 추가 기능 구현
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
 
+    private void sortNumbers() {
+        Collections.sort(numbers);
+    }
 
 }
