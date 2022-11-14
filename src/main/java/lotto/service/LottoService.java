@@ -7,7 +7,6 @@ import lotto.util.SystemMessage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LottoService {
 
@@ -16,7 +15,6 @@ public class LottoService {
     List<List<Integer>> generatedLotto;
     List<Integer> winningNumbers;
     int bonusNumber;
-    int ticket;
 
     public LottoService() {
         input = new Input();
@@ -26,21 +24,23 @@ public class LottoService {
     public void startService() {
         message.inputMoneyMessage();
         purchaseLotto();
-        generateLotto(ticket);
+        generateLotto(input.getLottoTicket());
+
         inputWinningNumbers();
         inputBonusNumber();
-        startDraw();
+        draw();
+
     }
 
     private void purchaseLotto() {
         input.inputUserMoney();
-        ticket = input.getLottoTicket();
+        int ticket = input.getLottoTicket();
         message.purchaseResultMessage(ticket);
     }
 
     private void generateLotto(int ticket) {
         generatedLotto = new ArrayList<>();
-        GenerateLotto generateLotto = new GenerateLotto(ticket);
+        PurchaseLotto generateLotto = new PurchaseLotto(ticket);
         generatedLotto = generateLotto.getPurchasedLottoList();
         message.printGeneratedLotto(generatedLotto);
     }
@@ -59,14 +59,17 @@ public class LottoService {
         bonusNumber = input.getBonusNumber();
     }
 
-    private void startDraw() {
+    private void draw() {
         LottoDraw lottoDraw = new LottoDraw(generatedLotto, winningNumbers, bonusNumber);
         lottoDraw.startDraw();
-        Map<Integer, Integer> lottoResult = lottoDraw.getDrawResult();
+        Map<Integer, Integer> drawResult = lottoDraw.getDrawResult();
         int bonusMatched = lottoDraw.getBonusNumberMatched();
-//        ResultMessage resultMessage = new ResultMessage(lottoResult, bonusMatched);
-        List<Integer> keyset = lottoResult.keySet().stream().sorted().collect(Collectors.toList());
-        System.out.println("LottoService.startDraw : " + keyset);
+        createDrawResult(drawResult, bonusMatched);
+    }
+
+    private void createDrawResult(Map<Integer, Integer> drawResult, int bonusMatched) {
+        ResultMessage resultMessage = new ResultMessage(drawResult, bonusMatched);
+        resultMessage.printResultMessage();
     }
 
 }
