@@ -32,22 +32,19 @@ public class MoneyValidation {
 
     private void isInputInteger(String money) {
         if (Long.parseLong(money) > Integer.MAX_VALUE) {
-            errorMessage.illegalMoneyTypeMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(errorMessage.illegalMoneyTypeMessage());
         }
     }
 
     private void isInputDividable(int money) {
         if (money % 1000 != 0) {
-            errorMessage.illegalMoneyMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(errorMessage.illegalMoneyMessage());
         }
     }
 
     private void isMoneyInsufficient(int money) {
         if (money < 1000) {
-            errorMessage.insufficientMoneyMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(errorMessage.insufficientMoneyMessage());
         }
     }
 
