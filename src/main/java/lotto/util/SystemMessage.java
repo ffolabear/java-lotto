@@ -1,6 +1,7 @@
 package lotto.util;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static lotto.view.MessageDetail.*;
 
@@ -14,16 +15,15 @@ public class SystemMessage {
 
     public void purchaseResultMessage(int ticket) {
         sb = new StringBuilder();
-        sb.append("\n")
-                .append(ticket)
-                .append(PURCHASE_RESULT.getMessage());
+        sb.append("\n").append(ticket).append(PURCHASE_RESULT.getMessage());
         System.out.println(sb);
     }
 
     public void printGeneratedLotto(List<List<Integer>> generatedLotto) {
         sb = new StringBuilder();
         for (List<Integer> lotto : generatedLotto) {
-            sb.append(lotto).append("\n");
+            List<Integer> sortedLotto = lotto.stream().collect(Collectors.toList());
+            sb.append(sortedLotto).append("\n");
         }
         System.out.println(sb);
     }
