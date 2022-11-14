@@ -34,6 +34,13 @@ public class InputTest extends NsTest {
             assertThatThrownBy(() -> run(String.valueOf(Long.MAX_VALUE)))
                     .isInstanceOf(IllegalArgumentException.class);
         }
+
+        @Test
+        @DisplayName("입력값이 1000보다 작을 때")
+        void 입력값이_1000보다_작을때() {
+            assertThatThrownBy(() -> run("900"))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }
     }
 
     @Nested
