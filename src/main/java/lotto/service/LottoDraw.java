@@ -39,13 +39,12 @@ public class LottoDraw {
                 generateResultMap(matchAmount);
             }
         }
+        applyBonusMatched();
     }
 
     private int draw(List<Integer> lotto) {
-        List<Integer> matchNumbers = lotto.stream()
-                .filter(number -> winningNumbers.stream()
-                        .anyMatch(Predicate.isEqual(number)))
-                .collect(Collectors.toList());
+        List<Integer> matchNumbers = lotto.stream().filter(
+                number -> winningNumbers.stream().anyMatch(Predicate.isEqual(number))).collect(Collectors.toList());
         if (matchNumbers.size() == 5) {
             isBonusMatched(lotto);
         }
@@ -68,5 +67,10 @@ public class LottoDraw {
         }
     }
 
-
+    private void applyBonusMatched() {
+        int bonusRankNumberRequired = RankDetail.BONUS.getMatchAmount();
+        if (bonusNumberMatched != 0 && lottoResult.get(bonusRankNumberRequired) != 0) {
+            lottoResult.put(bonusRankNumberRequired, lottoResult.get(bonusRankNumberRequired) - bonusNumberMatched);
+        }
+    }
 }
