@@ -1,22 +1,22 @@
 package lotto.util;
 
-import lotto.view.MessageDetail;
-
 import java.util.List;
+
+import static lotto.view.MessageDetail.*;
 
 public class SystemMessage {
 
     StringBuilder sb;
 
     public void inputMoneyMessage() {
-        System.out.println(MessageDetail.INPUT_MONEY.getMessage());
+        System.out.println(INPUT_MONEY.getMessage());
     }
 
     public void purchaseResultMessage(int ticket) {
         sb = new StringBuilder();
         sb.append("\n")
                 .append(ticket)
-                .append(MessageDetail.PURCHASE_RESULT.getMessage());
+                .append(PURCHASE_RESULT.getMessage());
         System.out.println(sb);
     }
 
@@ -29,12 +29,12 @@ public class SystemMessage {
     }
 
     public void inputWinningNumbersMessage() {
-        System.out.println(MessageDetail.INPUT_WINNING_NUMBERS.getMessage());
+        System.out.println(INPUT_WINNING_NUMBERS.getMessage());
     }
 
     public void inputBonusNumberMessage() {
         sb = new StringBuilder();
-        sb.append("\n").append(MessageDetail.INPUT_BONUS_NUMBER.getMessage());
+        sb.append("\n").append(INPUT_BONUS_NUMBER.getMessage());
         System.out.println(sb);
     }
 
