@@ -13,8 +13,7 @@ public class NumberValidation implements InputValidation {
     @Override
     public void isInputDigit(String number) {
         if (!number.matches("[0-9]+")) {
-            errorMessage.illegalArgumentMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(errorMessage.illegalArgumentMessage());
         }
     }
 
@@ -25,8 +24,7 @@ public class NumberValidation implements InputValidation {
 
     public void isValidRange(int convertedNumber) {
         if (convertedNumber < LottoSetting.START_NUMBER.getValue() || LottoSetting.END_NUMBER.getValue() < convertedNumber) {
-            errorMessage.illegalNumberRangeMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(errorMessage.illegalNumberRangeMessage());
         }
     }
 
