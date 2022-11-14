@@ -13,7 +13,6 @@ public class Input {
     int ticket;
     int bonusNumber;
 
-
     public Input() {
         this.winningNumbers = new ArrayList<>();
         this.userMoney = 0;
@@ -45,7 +44,7 @@ public class Input {
 
     public void inputWinningNumbers() {
         String inputNumbers = Console.readLine();
-        WinningNumberValidation validation = new WinningNumberValidation();
+        LottoValidation validation = new LottoValidation();
         validation.validate(inputNumbers);
         winningNumbers = validation.getValidatedWinningNumber();
     }
