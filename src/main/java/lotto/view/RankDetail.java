@@ -2,21 +2,19 @@ package lotto.view;
 
 public enum RankDetail {
 
-    FIRST(6, 2000000000, 1),
-    SECOND_BONUS(5, 30000000, 2),
-    SECOND(5, 1500000, 3),
-    THIRD(4, 50000, 4),
-    FOURTH(3, 5000, 5),
+    FIRST(6, 2000000000),
+    SECOND_BONUS(5, 30000000),
+    SECOND(5, 1500000),
+    THIRD(4, 50000),
+    FOURTH(3, 5000),
     ;
 
     private final int matchAmount;
     private final int prize;
-    private final int rank;
 
-    RankDetail(int matchAmount, int prize, int rank) {
+    RankDetail(int matchAmount, int prize) {
         this.matchAmount = matchAmount;
         this.prize = prize;
-        this.rank = rank;
     }
 
     public int getMatchAmount() {
@@ -27,7 +25,4 @@ public enum RankDetail {
         return prize;
     }
 
-    public int getRank() {
-        return rank;
-    }
 }
