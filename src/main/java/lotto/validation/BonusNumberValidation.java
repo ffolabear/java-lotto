@@ -32,8 +32,7 @@ public class BonusNumberValidation {
 
     private void checkDuplication() {
         if (winningNumbers.contains(bonusNumber)) {
-            errorMessage.duplicateBonusNumberMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(errorMessage.duplicateBonusNumberMessage());
         }
     }
 }
