@@ -46,8 +46,7 @@ public class LottoValidation {
 
     private void isValidAmount(List<Integer> convertedNumbers) {
         if (convertedNumbers.size() != 6) {
-            ErrorMessage.illegalNumberAmountMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.illegalNumberAmountMessage());
         }
     }
 
@@ -55,10 +54,8 @@ public class LottoValidation {
         List<Integer> checkingDuplication = convertedNumbers.stream()
                 .distinct()
                 .collect(Collectors.toList());
-
         if (checkingDuplication.size() != convertedNumbers.size()) {
-            errorMessage.duplicateNumberMessage();
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(errorMessage.duplicateNumberMessage());
         }
     }
 }
