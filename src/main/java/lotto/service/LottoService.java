@@ -11,6 +11,8 @@ import java.util.Map;
 public class LottoService {
 
     Input input;
+    LottoDraw lottoDraw;
+    ResultMessage resultMessage;
     SystemMessage message = new SystemMessage();
     List<List<Integer>> generatedLotto;
     List<Integer> winningNumbers;
@@ -25,11 +27,10 @@ public class LottoService {
         message.inputMoneyMessage();
         purchaseLotto();
         generateLotto(input.getLottoTicket());
-
         inputWinningNumbers();
         inputBonusNumber();
         draw();
-
+        calculateYield();
     }
 
     private void purchaseLotto() {
@@ -60,7 +61,7 @@ public class LottoService {
     }
 
     private void draw() {
-        LottoDraw lottoDraw = new LottoDraw(generatedLotto, winningNumbers, bonusNumber);
+        lottoDraw = new LottoDraw(generatedLotto, winningNumbers, bonusNumber);
         lottoDraw.startDraw();
         Map<Integer, Integer> drawResult = lottoDraw.getDrawResult();
         int bonusMatched = lottoDraw.getBonusNumberMatched();
@@ -68,8 +69,13 @@ public class LottoService {
     }
 
     private void createDrawResult(Map<Integer, Integer> drawResult, int bonusMatched) {
-        ResultMessage resultMessage = new ResultMessage(drawResult, bonusMatched);
+        resultMessage = new ResultMessage(drawResult, bonusMatched);
         resultMessage.printResultMessage();
+    }
+
+    private void calculateYield() {
+        CalculateYield calculateYield = new CalculateYield(lottoDraw.getDrawResult(), lottoDraw.getBonusNumberMatched(), input.getUserMoney());
+        resultMessage.printYieldMessage(calculateYield.getYield());
     }
 
 }
