@@ -15,7 +15,6 @@ public class Lotto {
         LottoValidation validation = new LottoValidation();
         validation.checkDuplication(numbers);
         this.numbers = numbers;
-        sortNumbers();
     }
 
     private void validate(List<Integer> numbers) {
@@ -28,10 +27,6 @@ public class Lotto {
     // TODO: 추가 기능 구현
     public List<Integer> getNumbers() {
         return numbers;
-    }
-
-    private void sortNumbers() {
-        Collections.sort(numbers);
     }
 
 }
