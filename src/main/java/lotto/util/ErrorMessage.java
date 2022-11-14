@@ -6,59 +6,51 @@ public class ErrorMessage {
 
     StringBuilder sb;
 
-    public void illegalArgumentMessage() {
+    public String illegalArgumentMessage() {
         sb = new StringBuilder();
-        sb.append(ERROR_HEAD.getError())
-                .append(ERROR_ILLEGAL_INPUT.getError());
-        System.out.println(sb);
+        sb.append(ERROR_HEAD.getError()).append(ERROR_ILLEGAL_INPUT.getError());
+        return sb.toString();
     }
 
-    public void illegalNumberRangeMessage() {
+    public String illegalNumberRangeMessage() {
         sb = new StringBuilder();
-        sb.append(ERROR_HEAD.getError())
-                .append(ERROR_RANGE.getError());
-        System.out.println(sb);
+        sb.append(ERROR_HEAD.getError()).append(ERROR_RANGE.getError());
+        return sb.toString();
     }
 
-    public void illegalMoneyMessage() {
+    public String illegalMoneyMessage() {
         sb = new StringBuilder();
         sb.append(ERROR_HEAD.getError()).append(ERROR_NON_DIVIDABLE.getError());
-        System.out.println(sb);
+        return sb.toString();
     }
 
-    public static void illegalNumberAmountMessage() {
+    public static String illegalNumberAmountMessage() {
         StringBuilder sb = new StringBuilder();
         sb.append(ERROR_HEAD.getError()).append(ERROR_NUMBER_AMOUNT.getError());
-        System.out.println(sb);
+        return sb.toString();
     }
 
-    public void illegalNumberFormatMessage() {
-        sb = new StringBuilder();
-        sb.append(ERROR_HEAD.getError()).append(ERROR_NUMBER_COMMA.getError());
-        System.out.println(sb);
-    }
-
-    public void illegalMoneyTypeMessage() {
+    public String illegalMoneyTypeMessage() {
         sb = new StringBuilder();
         sb.append(ERROR_HEAD.getError()).append(ERROR_NON_INTEGER.getError());
-        System.out.println(sb);
+        return sb.toString();
     }
 
-    public void duplicateNumberMessage() {
+    public String duplicateNumberMessage() {
         sb = new StringBuilder();
         sb.append(ERROR_HEAD.getError()).append(ERROR_DUPLICATE_NUMBER.getError());
-        System.out.println(sb);
+        return sb.toString();
     }
 
-    public void duplicateBonusNumberMessage() {
+    public String duplicateBonusNumberMessage() {
         sb = new StringBuilder();
         sb.append(ERROR_HEAD.getError()).append(ERROR_DUPLICATE_BONUS_NUMBER.getError());
-        System.out.println(sb);
+        return sb.toString();
     }
 
-    public void insufficientMoneyMessage() {
+    public String insufficientMoneyMessage() {
         sb = new StringBuilder();
         sb.append(ERROR_HEAD.getError()).append(ERROR_INSUFFICIENT_MONEY.getError());
-        System.out.println(sb);
+        return sb.toString();
     }
 }
