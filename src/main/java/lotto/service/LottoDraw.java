@@ -1,5 +1,7 @@
 package lotto.service;
 
+import lotto.view.RankDetail;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +21,8 @@ public class LottoDraw {
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
         this.lottoResult = new HashMap<>();
+        addKeysToResultMap();
     }
-
 
     public Map<Integer, Integer> getDrawResult() {
         return lottoResult;
@@ -59,5 +61,12 @@ public class LottoDraw {
             bonusNumberMatched++;
         }
     }
+
+    private void addKeysToResultMap() {
+        for (RankDetail rank : RankDetail.values()) {
+            lottoResult.put(rank.getMatchAmount(), 0);
+        }
+    }
+
 
 }
