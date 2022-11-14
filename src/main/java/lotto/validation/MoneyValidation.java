@@ -2,7 +2,7 @@ package lotto.validation;
 
 import lotto.util.ErrorMessage;
 
-public class MoneyValidation{
+public class MoneyValidation {
 
     int convertedMoney;
     ErrorMessage errorMessage;
@@ -18,6 +18,7 @@ public class MoneyValidation{
         numberValidation.isInputDigit(inputMoney);
         isInputInteger(inputMoney);
         convertedMoney = numberValidation.convertToInteger(inputMoney);
+        isMoneyInsufficient(convertedMoney);
         isInputDividable(convertedMoney);
     }
 
@@ -39,6 +40,13 @@ public class MoneyValidation{
     private void isInputDividable(int money) {
         if (money % 1000 != 0) {
             errorMessage.illegalMoneyMessage();
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void isMoneyInsufficient(int money) {
+        if (money < 1000) {
+            errorMessage.insufficientMoneyMessage();
             throw new IllegalArgumentException();
         }
     }
