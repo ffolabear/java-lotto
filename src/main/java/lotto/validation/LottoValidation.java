@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class WinningNumberValidation {
+public class LottoValidation {
 
     ErrorMessage errorMessage;
     String winningNumbers;
     List<Integer> convertedNumbers;
 
-    public WinningNumberValidation() {
+    public LottoValidation() {
         errorMessage = new ErrorMessage();
     }
 
