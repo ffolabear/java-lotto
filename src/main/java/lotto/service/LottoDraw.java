@@ -45,7 +45,7 @@ public class LottoDraw {
     private int draw(List<Integer> lotto) {
         List<Integer> matchNumbers = lotto.stream().filter(
                 number -> winningNumbers.stream().anyMatch(Predicate.isEqual(number))).collect(Collectors.toList());
-        if (matchNumbers.size() == 5) {
+        if (matchNumbers.size() == RankDetail.SECOND.getMatchAmount()) {
             isBonusMatched(lotto);
         }
         return matchNumbers.size();
