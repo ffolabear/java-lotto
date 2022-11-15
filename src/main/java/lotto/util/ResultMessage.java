@@ -1,5 +1,6 @@
 package lotto.util;
 
+import lotto.service.CalculateYield;
 import lotto.view.RankDetail;
 
 import java.text.DecimalFormat;
@@ -11,15 +12,18 @@ import static lotto.view.RankMessageDetail.*;
 
 public class ResultMessage {
 
+    CalculateYield calculateYield;
     Map<Integer, Integer> drawResult;
     StringBuilder resultMessage;
+    int userMoney;
     int bonusMatched;
     boolean bonusResultTurn;
 
-    public ResultMessage(Map<Integer, Integer> drawResult, int bonusMatched) {
+    public ResultMessage(Map<Integer, Integer> drawResult, int bonusMatched, int userMoney) {
         this.drawResult = drawResult;
         this.bonusMatched = bonusMatched;
         this.resultMessage = new StringBuilder();
+        this.userMoney = userMoney;
         bonusResultTurn = false;
         createMessage();
     }
@@ -27,6 +31,7 @@ public class ResultMessage {
     private void createMessage() {
         createMessageHeader();
         createMessageBody();
+        createYieldMessage();
     }
 
     public void printResultMessage() {
@@ -90,8 +95,10 @@ public class ResultMessage {
     }
 
 
-    public void printYieldMessage(String yield) {
-        System.out.println(String.format(YIELD.getMessage(), yield));
+    public void createYieldMessage() {
+        calculateYield = new CalculateYield(drawResult, bonusMatched, userMoney);
+        String yield = calculateYield.getYield();
+        resultMessage.append(String.format(YIELD.getMessage(), yield));
     }
 
 
