@@ -2,6 +2,7 @@ package lotto.service;
 
 import lotto.view.RankDetail;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class CalculateYield {
@@ -21,7 +22,9 @@ public class CalculateYield {
     public String getYield() {
         double yield = ((double) totalPrize / (double) userMoney) * 100;
         yield = Math.round(yield * 100) / 100.0;
-        return String.valueOf(yield);
+        String convertedYield = String.format("%.1f", yield);
+        BigDecimal bigDecimal = BigDecimal.valueOf(Double.parseDouble(convertedYield)).setScale(1);
+        return String.valueOf(bigDecimal);
     }
 
     private void calculate() {
