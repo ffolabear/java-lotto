@@ -19,7 +19,8 @@ public class CalculateYield {
     }
 
     public String getYield() {
-        double yield = ((((double) totalPrize / (double) userMoney) * 100) / 100.0) * 100;
+        double yield = ((double) totalPrize / (double) userMoney) * 100;
+        yield = Math.round((yield * 100) / 100.0);
         return String.valueOf(yield);
     }
 
