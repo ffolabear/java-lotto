@@ -6,6 +6,7 @@ public enum ErrorDetail {
     ERROR_RANGE("로또 번호는 1부터 45 사이의 숫자여야 합니다."),
     ERROR_NON_DIVIDABLE("1,000원 단위로 입력해 주세요."),
     ERROR_INSUFFICIENT_MONEY("금액이 충분하지 않습니다."),
+    ERROR_NEGATIVE_MONEY("유효하지 않은 금액입니다."),
     ERROR_ILLEGAL_INPUT("입력값은 반드시 숫자여야 합니다."),
     ERROR_NUMBER_AMOUNT("당첨 번호는 반드시 여섯 개여야 합니다."),
     ERROR_NUMBER_COMMA("숫자와 숫자 사이에 쉼표를 넣어 주세요."),
