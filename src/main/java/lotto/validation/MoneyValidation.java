@@ -18,6 +18,7 @@ public class MoneyValidation {
         numberValidation.isInputDigit(inputMoney);
         isInputInteger(inputMoney);
         convertedMoney = numberValidation.convertToInteger(inputMoney);
+        isMoneyNegative(convertedMoney);
         isMoneyInsufficient(convertedMoney);
         isInputDividable(convertedMoney);
     }
@@ -43,9 +44,17 @@ public class MoneyValidation {
     }
 
     private void isMoneyInsufficient(int money) {
-        if (money < 1000) {
+        if (0 <= money && money < 1000) {
             throw new IllegalArgumentException(errorMessage.insufficientMoneyMessage());
         }
     }
+
+    private void isMoneyNegative(int money) {
+        if (money < 0) {
+            throw new IllegalArgumentException(errorMessage.negativeMoneyMessage());
+        }
+    }
+
+
 
 }
