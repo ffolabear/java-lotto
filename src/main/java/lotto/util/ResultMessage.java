@@ -21,7 +21,6 @@ public class ResultMessage {
         this.bonusMatched = bonusMatched;
         this.resultMessage = new StringBuilder();
         bonusResultTurn = false;
-        System.out.println(drawResult);
         createMessage();
     }
 
@@ -70,10 +69,22 @@ public class ResultMessage {
 
     private String createSingleMessageBodyLine(RankDetail rank) {
         String prize = convertPrize(rank.getPrize());
-        if (rank.getRank().equals("bonus")) {
+        if (rank.getMatchAmount() == RankDetail.BONUS.getMatchAmount()) {
+            return createBonusMatchAmountMessageBodyLine(rank);
+        }
+        return String.format(MATCH_RESULT.getMessage(), rank.getMatchAmount(), "", prize,
+                drawResult.get(rank.getMatchAmount())) + "\n";
+    }
+
+    private String createBonusMatchAmountMessageBodyLine(RankDetail rank) {
+        String prize;
+        if (bonusResultTurn) {
+            prize = convertPrize(RankDetail.BONUS.getPrize());
             return String.format(MATCH_RESULT.getMessage(), rank.getMatchAmount(), BONUS_MATCHED.getMessage(),
                     prize, bonusMatched) + "\n";
         }
+        bonusResultTurn = true;
+        prize = convertPrize(RankDetail.SECOND.getPrize());
         return String.format(MATCH_RESULT.getMessage(), rank.getMatchAmount(), "", prize,
                 drawResult.get(rank.getMatchAmount())) + "\n";
     }
