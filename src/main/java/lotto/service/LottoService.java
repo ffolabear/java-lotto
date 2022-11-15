@@ -10,10 +10,10 @@ import java.util.Map;
 
 public class LottoService {
 
+    SystemMessage message = new SystemMessage();
     Input input;
     LottoDraw lottoDraw;
     ResultMessage resultMessage;
-    SystemMessage message = new SystemMessage();
     List<List<Integer>> generatedLotto;
     List<Integer> winningNumbers;
     int bonusNumber;

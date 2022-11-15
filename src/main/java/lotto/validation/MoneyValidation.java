@@ -4,9 +4,9 @@ import lotto.util.ErrorMessage;
 
 public class MoneyValidation {
 
-    int convertedMoney;
     ErrorMessage errorMessage;
     NumberValidation numberValidation;
+    int convertedMoney;
 
     public MoneyValidation(String inputMoney) {
         errorMessage = new ErrorMessage();

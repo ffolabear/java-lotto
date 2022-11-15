@@ -11,8 +11,8 @@ import static lotto.view.RankMessageDetail.*;
 
 public class ResultMessage {
 
-    StringBuilder resultMessage;
     Map<Integer, Integer> drawResult;
+    StringBuilder resultMessage;
     int bonusMatched;
     boolean bonusResultTurn;
 
