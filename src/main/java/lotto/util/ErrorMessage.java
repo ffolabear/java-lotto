@@ -24,6 +24,12 @@ public class ErrorMessage {
         return sb.toString();
     }
 
+    public String negativeMoneyMessage() {
+        sb = new StringBuilder();
+        sb.append(ERROR_HEAD.getError()).append(ERROR_NEGATIVE_MONEY.getError());
+        return sb.toString();
+    }
+
     public static String illegalNumberAmountMessage() {
         StringBuilder sb = new StringBuilder();
         sb.append(ERROR_HEAD.getError()).append(ERROR_NUMBER_AMOUNT.getError());
