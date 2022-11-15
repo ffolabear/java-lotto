@@ -12,7 +12,7 @@ public class NumberValidation implements InputValidation {
 
     @Override
     public void isInputDigit(String number) {
-        if (!number.matches("[0-9]+")) {
+        if (!number.matches("^[-]?\\d*")) {
             throw new IllegalArgumentException(errorMessage.illegalArgumentMessage());
         }
     }
