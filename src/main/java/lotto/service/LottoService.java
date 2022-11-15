@@ -30,7 +30,6 @@ public class LottoService {
         inputWinningNumbers();
         inputBonusNumber();
         draw();
-        calculateYield();
     }
 
     private void purchaseLotto() {
@@ -69,14 +68,14 @@ public class LottoService {
     }
 
     private void createDrawResult(Map<Integer, Integer> drawResult, int bonusMatched) {
-        resultMessage = new ResultMessage(drawResult, bonusMatched);
+        resultMessage = new ResultMessage(drawResult, bonusMatched, input.getUserMoney());
         resultMessage.printResultMessage();
     }
 
-    private void calculateYield() {
-        CalculateYield calculateYield = new CalculateYield(lottoDraw.getDrawResult(), lottoDraw.getBonusNumberMatched(),
-                input.getUserMoney());
-        resultMessage.printYieldMessage(calculateYield.getYield());
-    }
+//    private void calculateYield() {
+//        CalculateYield calculateYield = new CalculateYield(lottoDraw.getDrawResult(), lottoDraw.getBonusNumberMatched(),
+//                input.getUserMoney());
+//        resultMessage.printYieldMessage(calculateYield.getYield());
+//    }
 
 }
