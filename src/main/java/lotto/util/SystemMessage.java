@@ -15,14 +15,14 @@ public class SystemMessage {
 
     public void purchaseResultMessage(int ticket) {
         sb = new StringBuilder();
-        sb.append("\n").append(ticket).append(PURCHASE_RESULT.getMessage());
+        sb.append("\n").append(String.format(PURCHASE_RESULT.getMessage(), ticket));
         System.out.println(sb);
     }
 
     public void printGeneratedLotto(List<List<Integer>> generatedLotto) {
         sb = new StringBuilder();
         for (List<Integer> lotto : generatedLotto) {
-            List<Integer> sortedLotto = lotto.stream().collect(Collectors.toList());
+            List<Integer> sortedLotto = lotto.stream().sorted().collect(Collectors.toList());
             sb.append(sortedLotto).append("\n");
         }
         System.out.println(sb);
