@@ -100,7 +100,7 @@
 </details>
 
 <div align="center">
-    <img src="./image/Build_Idea.png" alt="">
+    <img src="./image/Architecture.png" alt="">
 </div>
 
 <br>
