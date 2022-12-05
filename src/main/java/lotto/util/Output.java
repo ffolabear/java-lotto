@@ -18,7 +18,7 @@ public class Output {
     public void printLotto(List<Lotto> purchasedLotto) {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : purchasedLotto) {
-            sb.append(lotto.toString()).append("\n");
+            sb.append(lotto.getNumbers()).append("\n");
         }
         System.out.println(sb);
     }
