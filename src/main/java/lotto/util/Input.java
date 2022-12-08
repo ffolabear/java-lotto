@@ -3,6 +3,7 @@ package lotto.util;
 import camp.nextstep.edu.missionutils.Console;
 import lotto.service.LottoSetting;
 import lotto.validation.BonusNumberValidation;
+import lotto.validation.CommonValidation;
 import lotto.validation.MoneyValidation;
 import lotto.validation.NumberValidation;
 
@@ -11,8 +12,11 @@ import java.util.List;
 
 public class Input {
 
-    public long inputMoney() {
+    CommonValidation commonValidation = new CommonValidation();
+
+    public int inputMoney() {
         String money = Console.readLine();
+        commonValidation.test(money);
         MoneyValidation moneyValidation = new MoneyValidation();
         moneyValidation.test(money);
         return convertToTicket(money);
@@ -27,19 +31,14 @@ public class Input {
 
     public int inputBonusNumber(List<Integer> winningNumbers) {
         String number = Console.readLine();
-        NumberValidation numberValidation = new NumberValidation();
-        numberValidation.test(number);
+        commonValidation.test(number);
         BonusNumberValidation bonusNumberValidation = new BonusNumberValidation(winningNumbers);
         bonusNumberValidation.test(number);
         return convertToInteger(number);
     }
 
-    private long convertToLong(String money) {
-        return Long.parseLong(money);
-    }
-
-    private long convertToTicket(String money) {
-        long convertedMoney = convertToLong(money);
+    private int convertToTicket(String money) {
+        int convertedMoney = convertToInteger(money);
         return convertedMoney / LottoSetting.MONEY_UNIT.getAttribute();
     }
 
