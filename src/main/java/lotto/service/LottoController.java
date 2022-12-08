@@ -18,8 +18,8 @@ public class LottoController {
         output.printMessage(LottoMessage.START_MESSAGE.getMessage());
         purchaseLotto(input.inputMoney());
         setWinningNumber();
-        drawLotto(purchasedLotto, winningNumbers);
         setBonusNumber();
+        drawLotto(purchasedLotto, winningNumbers);
     }
 
     public void purchaseLotto(long ticket) {
@@ -41,7 +41,8 @@ public class LottoController {
     }
 
     public void drawLotto(List<Lotto> purchasedLotto, List<Integer> winningNumbers) {
-
+        Draw draw = new Draw(purchasedLotto, winningNumbers, bonusNumber);
+        draw.startDraw();
     }
 
 
