@@ -43,6 +43,7 @@ public class LottoController {
     public void drawLotto(List<Lotto> purchasedLotto, List<Integer> winningNumbers) {
         Draw draw = new Draw(purchasedLotto, winningNumbers, bonusNumber);
         draw.startDraw();
+        draw.generateDrawResultMessage();
     }
 
 
