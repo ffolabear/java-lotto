@@ -1,5 +1,7 @@
 package lotto.service;
 
+import lotto.view.DrawResultGenerator;
+
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
@@ -30,7 +32,7 @@ public class Draw {
     }
 
     private void makeDrawResult(int matchCount, boolean isBonusMatched) {
-        if (isBonusMatched){
+        if (isBonusMatched) {
             addBonusResult();
             return;
         }
@@ -43,7 +45,7 @@ public class Draw {
     }
 
     private void addBonusResult() {
-            rankMap.put(Rank.SECOND, rankMap.get(Rank.SECOND) + 1);
+        rankMap.put(Rank.SECOND, rankMap.get(Rank.SECOND) + 1);
     }
 
 
@@ -62,6 +64,10 @@ public class Draw {
             return lotto.getNumbers().contains(bonusNumber);
         }
         return false;
+    }
+
+    public void generateDrawResultMessage() {
+        DrawResultGenerator resultGenerator = new DrawResultGenerator(rankMap);
     }
 
 }
