@@ -5,6 +5,9 @@ import lotto.view.LottoErrors;
 public interface Predicate {
 
     void test(String input);
+
     void printError(LottoErrors lottoErrors);
+
+    int convertToInteger(String input);
 
 }
