@@ -29,6 +29,11 @@ public class BonusNumberValidation implements Predicate {
         throw new IllegalArgumentException(lottoErrors.getError());
     }
 
+    @Override
+    public int convertToInteger(String input) {
+        return Integer.parseInt(input);
+    }
+
     private void isDuplicateNumber(String input) {
         if (winningNumbers.contains(Integer.parseInt(input))) {
             printError(ERROR_INVALID_BONUS_NUMBER);
