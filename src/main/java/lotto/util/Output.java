@@ -4,6 +4,7 @@ import lotto.service.Lotto;
 import lotto.view.LottoMessage;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Output {
 
@@ -18,7 +19,7 @@ public class Output {
     public void printLotto(List<Lotto> purchasedLotto) {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : purchasedLotto) {
-            sb.append(lotto.getNumbers()).append("\n");
+            sb.append(lotto.getNumbers().stream().sorted().collect(Collectors.toList())).append("\n");
         }
         System.out.println(sb);
     }
