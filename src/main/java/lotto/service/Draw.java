@@ -68,6 +68,7 @@ public class Draw {
 
     public void generateDrawResultMessage() {
         DrawResultGenerator resultGenerator = new DrawResultGenerator(rankMap);
+        resultGenerator.generateResultMessage();
     }
 
 }
