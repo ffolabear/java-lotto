@@ -13,10 +13,12 @@ public class LottoController {
     private List<Lotto> purchasedLotto;
     private List<Integer> winningNumbers;
     private int bonusNumber;
+    private int money;
 
     public void startLotto() {
         output.printMessage(LottoMessage.START_MESSAGE.getMessage());
-        purchaseLotto(input.inputMoney());
+        money = input.inputMoney();
+        purchaseLotto(input.convertToTicket(money));
         setWinningNumber();
         setBonusNumber();
         drawLotto(purchasedLotto, winningNumbers);
@@ -43,9 +45,11 @@ public class LottoController {
     public void drawLotto(List<Lotto> purchasedLotto, List<Integer> winningNumbers) {
         Draw draw = new Draw(purchasedLotto, winningNumbers, bonusNumber);
         draw.startDraw();
-        draw.generateDrawResultMessage();
+        draw.generateDrawResultMessage(money);
     }
 
+    public void calculateYield() {
 
+    }
 
 }
