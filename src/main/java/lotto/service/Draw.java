@@ -12,13 +12,13 @@ public class Draw {
     private final List<Lotto> purchasedLotto;
     private final List<Integer> winningNumbers;
     private final int bonusNumber;
-    private final Map<Rank, Integer> rankMap;
+    private final Map<Rank, Integer> drawResult;
 
     public Draw(List<Lotto> purchasedLotto, List<Integer> winningNumbers, int bonusNumber) {
         this.purchasedLotto = purchasedLotto;
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
-        rankMap = Rank.makeRankMap();
+        drawResult = Rank.makeRankMap();
     }
 
     public void startDraw() {
@@ -38,14 +38,14 @@ public class Draw {
         }
         for (Rank rank : Rank.values()) {
             if (rank.getMatchAmount() == matchCount && rank.getRank() != Rank.SECOND.getRank()) {
-                rankMap.put(rank, rankMap.getOrDefault(rank, 0) + 1);
+                drawResult.put(rank, drawResult.getOrDefault(rank, 0) + 1);
             }
 
         }
     }
 
     private void addBonusResult() {
-        rankMap.put(Rank.SECOND, rankMap.get(Rank.SECOND) + 1);
+        drawResult.put(Rank.SECOND, drawResult.get(Rank.SECOND) + 1);
     }
 
 
@@ -66,9 +66,11 @@ public class Draw {
         return false;
     }
 
-    public void generateDrawResultMessage() {
-        DrawResultGenerator resultGenerator = new DrawResultGenerator(rankMap);
+    public void generateDrawResultMessage(int money) {
+        DrawResultGenerator resultGenerator = new DrawResultGenerator(drawResult, money);
         resultGenerator.generateResultMessage();
     }
+
+
 
 }
