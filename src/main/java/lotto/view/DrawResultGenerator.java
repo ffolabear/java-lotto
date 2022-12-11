@@ -1,21 +1,24 @@
 package lotto.view;
 
+import lotto.service.CalculateYield;
 import lotto.service.Rank;
 
 import java.util.*;
 
 public class DrawResultGenerator {
 
-    private final Map<Rank, Integer> rankMap;
+    private final Map<Rank, Integer> drawResult;
     private List<Rank> keySet;
+    private int money;
 
-    public DrawResultGenerator(Map<Rank, Integer> rankMap) {
-        this.rankMap = rankMap;
+    public DrawResultGenerator(Map<Rank, Integer> drawResult, int money) {
+        this.drawResult = drawResult;
+        this.money = money;
         sortMap();
     }
 
     private void sortMap() {
-        keySet = new ArrayList<>(rankMap.keySet());
+        keySet = new ArrayList<>(drawResult.keySet());
         keySet.sort((o1, o2) -> o1.getRank() - o2.getRank());
 
     }
@@ -26,6 +29,7 @@ public class DrawResultGenerator {
         for (Rank rank : keySet) {
             printResultMessage(rank);
         }
+        calculateYield(drawResult, money);
     }
 
     public void printResultMessage(Rank rank) {
@@ -40,12 +44,17 @@ public class DrawResultGenerator {
         return normalResultMessage(rank);
     }
 
-    private String  normalResultMessage(Rank rank) {
-        return DrawResultMessage.WITHOUT_BONUS.getMessage(rank, rankMap.get(rank));
+    private String normalResultMessage(Rank rank) {
+        return DrawResultMessage.WITHOUT_BONUS.getMessage(rank, drawResult.get(rank));
     }
 
     private String bonusResultMessage(Rank rank) {
-        return DrawResultMessage.WITH_BONUS.getMessage(rank, rankMap.get(rank));
+        return DrawResultMessage.WITH_BONUS.getMessage(rank, drawResult.get(rank));
+    }
+
+    private void calculateYield(Map<Rank, Integer> drawResult, int money) {
+        CalculateYield calculateYield = new CalculateYield(drawResult, money);
+        calculateYield.calculate();
     }
 
 }
