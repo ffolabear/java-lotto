@@ -19,7 +19,7 @@ public class Input {
         commonValidation.test(money);
         MoneyValidation moneyValidation = new MoneyValidation();
         moneyValidation.test(money);
-        return convertToTicket(money);
+        return convertToInteger(money);
     }
 
     public List<Integer> inputWinningNumber() {
@@ -37,9 +37,8 @@ public class Input {
         return convertToInteger(number);
     }
 
-    private int convertToTicket(String money) {
-        int convertedMoney = convertToInteger(money);
-        return convertedMoney / LottoSetting.MONEY_UNIT.getAttribute();
+    public int convertToTicket(int money) {
+        return money / LottoSetting.MONEY_UNIT.getAttribute();
     }
 
     private int convertToInteger(String input) {
