@@ -55,8 +55,8 @@ public class NumberValidation implements Predicate{
     }
 
     public void isValidNumberRange(int number) {
-        if (number < LottoSetting.START_NUMBER.getAttribute()
-                && LottoSetting.END_NUMBER.getAttribute() < number) {
+
+        if (number < LottoSetting.START_NUMBER.getAttribute() || LottoSetting.END_NUMBER.getAttribute() < number) {
             printError(ERROR_NUMBER_RANGE);
         }
     }
