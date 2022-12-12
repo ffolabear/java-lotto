@@ -12,7 +12,8 @@ public enum LottoErrors {
             LottoSetting.NUMBER_AMOUNT.getAttribute())),
     ERROR_DUPLICATE_NUMBER("당첨 번호는 중복되지 않는 번호여야 합니다."),
     ERROR_INVALID_BONUS_NUMBER("보너스 번호는 당첨번호와 중복되지 않는 번호여야 합니다."),
-    ERROR_NUMBER_RANGE("당첨 번호는 반드시 %s 와 %s 사이의 숫자여야 합니다.");
+    ERROR_NUMBER_RANGE(String.format("당첨 번호는 반드시 %s 와 %s 사이의 숫자여야 합니다.",
+            LottoSetting.START_NUMBER.getAttribute(), LottoSetting.END_NUMBER.getAttribute()));
 
     private final String Error;
     private final String errorHead = "[ERROR] ";
