@@ -16,17 +16,12 @@ public class BonusNumberValidation implements Predicate {
 
     @Override
     public void test(String input) {
-        try {
-            isDuplicateNumber(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            throw new IllegalArgumentException();
-        }
+        isDuplicateNumber(input);
     }
 
     @Override
-    public void printError(LottoErrors lottoErrors) {
-        throw new IllegalArgumentException(lottoErrors.getError());
+    public String printError(LottoErrors lottoErrors) {
+        return lottoErrors.getError();
     }
 
     @Override
@@ -36,7 +31,7 @@ public class BonusNumberValidation implements Predicate {
 
     private void isDuplicateNumber(String input) {
         if (winningNumbers.contains(Integer.parseInt(input))) {
-            printError(ERROR_INVALID_BONUS_NUMBER);
+            throw new IllegalArgumentException(printError(ERROR_INVALID_BONUS_NUMBER));
         }
     }
 
