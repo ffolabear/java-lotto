@@ -19,7 +19,7 @@ public class Output {
     public void printLotto(List<Lotto> purchasedLotto) {
         StringBuilder sb = new StringBuilder();
         for (Lotto lotto : purchasedLotto) {
-            sb.append(lotto.getNumbers().stream().sorted().collect(Collectors.toList())).append("\n");
+            sb.append(lotto.getNumbers().stream().sorted().collect(Collectors.toList())).append(",").append("\n");
         }
         System.out.println(sb);
     }
