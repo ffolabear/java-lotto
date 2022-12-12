@@ -6,7 +6,7 @@ public interface Predicate {
 
     void test(String input);
 
-    void printError(LottoErrors lottoErrors);
+    String printError(LottoErrors lottoErrors);
 
     int convertToInteger(String input);
 
