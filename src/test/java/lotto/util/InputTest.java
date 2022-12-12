@@ -19,7 +19,7 @@ public class InputTest extends NsTest {
     class MoneyInputTest {
 
         @ParameterizedTest
-        @ValueSource(strings = {"apple", "222", "  "})
+        @ValueSource(strings = {"apple", "222", "  ", "0"})
         void moneyInputTest(String input) {
             assertSimpleTest(() -> {
                 run(input);
