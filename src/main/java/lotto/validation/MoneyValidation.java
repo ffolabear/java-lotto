@@ -1,9 +1,9 @@
 package lotto.validation;
 
+import lotto.service.LottoSetting;
 import lotto.view.LottoErrors;
 
-import static lotto.view.LottoErrors.ERROR_MONEY_EXCESS;
-import static lotto.view.LottoErrors.ERROR_NON_DIVIDABLE;
+import static lotto.view.LottoErrors.*;
 
 public class MoneyValidation implements Predicate {
 
@@ -13,6 +13,7 @@ public class MoneyValidation implements Predicate {
     public void test(String input) {
         commonValidation.isInputDigit(input);
         isMoneyExcess(input);
+        isMoneyInsufficient(convertToInteger(input));
         isMoneyDividable(convertToInteger(input));
     }
 
@@ -24,6 +25,12 @@ public class MoneyValidation implements Predicate {
     @Override
     public int convertToInteger(String input) {
         return Integer.parseInt(input);
+    }
+
+    private void isMoneyInsufficient(int money) {
+        if (money < LottoSetting.MONEY_UNIT.getAttribute()) {
+            throw new IllegalArgumentException(printError(ERROR_INSUFFICIENT_MONEY));
+        }
     }
 
     private void isMoneyExcess(String input) {
