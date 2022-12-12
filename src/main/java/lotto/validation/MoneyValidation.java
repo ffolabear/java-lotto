@@ -11,19 +11,14 @@ public class MoneyValidation implements Predicate {
 
     @Override
     public void test(String input) {
-        try {
-            commonValidation.isInputDigit(input);
-            isMoneyExcess(input);
-            isMoneyDividable(convertToInteger(input));
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            throw new IllegalArgumentException();
-        }
+        commonValidation.isInputDigit(input);
+        isMoneyExcess(input);
+        isMoneyDividable(convertToInteger(input));
     }
 
     @Override
-    public void printError(LottoErrors lottoErrors){
-        throw new IllegalArgumentException(lottoErrors.getError());
+    public String printError(LottoErrors lottoErrors) {
+        return lottoErrors.getError();
     }
 
     @Override
@@ -33,15 +28,13 @@ public class MoneyValidation implements Predicate {
 
     private void isMoneyExcess(String input) {
         if (Long.parseLong(input) > Integer.MAX_VALUE) {
-            printError(ERROR_MONEY_EXCESS);
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(printError(ERROR_MONEY_EXCESS));
         }
     }
 
     private void isMoneyDividable(int money) {
         if (money % 1000 != 0) {
-            printError(ERROR_NON_DIVIDABLE);
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(printError(ERROR_NON_DIVIDABLE));
         }
     }
 
