@@ -48,8 +48,4 @@ public class LottoController {
         draw.generateDrawResultMessage(money);
     }
 
-    public void calculateYield() {
-
-    }
-
 }
